@@ -6,6 +6,6 @@ def uppercase(str):
             i = 65 + (ord(c) - 97)
         else:
             i = ord(c)
-        print(f'{i:c}', end="")
+        print('{:c}'.format(i), end="")
     # new line at the end of str
     print()
