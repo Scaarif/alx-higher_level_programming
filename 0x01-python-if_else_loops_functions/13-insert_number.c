@@ -19,10 +19,18 @@ listint_t *insert_node(listint_t **head, int num)
 	/*Determine where to insert new in list*/
 	curr = *head;
 	if (curr == NULL)
+	{
 		new->next = curr;
+		*head = new;
+	}
+	else if (curr->n > num)
+	{
+		new->next = curr;
+		*head = new;
+	}
 	else
 	{
-		for (; curr->n < num && curr->next != NULL; curr = curr->next)
+		for (; curr != NULL && curr->n < num; curr = curr->next)
 			before = curr;
 		before->next = new;
 		new->next = curr;
