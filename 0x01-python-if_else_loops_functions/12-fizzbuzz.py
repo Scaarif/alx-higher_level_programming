@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def fizzbuzz():
     """ Prints the numbers 1 to 100 separated by space.
     For multiples of three, prints Fizz and five, Buzz

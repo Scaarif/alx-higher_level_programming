@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def uppercase(str):
     for c in str:
         # is the char lowercase? if so, make it uppercase
