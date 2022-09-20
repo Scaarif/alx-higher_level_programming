@@ -1,3 +1,3 @@
 #!/usr/bin/python3
 for i in range(99):
-    print(f"{i} = {hex(i)}")#use {i:d} if this fails
+    print("{:d} = {}".format(i, hex(i)))#use {i:d} if this fails
