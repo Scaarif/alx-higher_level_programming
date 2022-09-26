@@ -4,6 +4,11 @@ def print_reversed_list_integer(my_list=[]):
     Args:
         my_list: the list of integers
     """
-    my_list.reverse()
-    for i in my_list:
-        print("{:d}".format(i))
+    # Handle the empty list case
+    if len(my_list):
+        my_list.reverse()
+        for i in my_list:
+            print("{:d}".format(i))
+    else:
+        # list empty - print nothing
+        print()

@@ -21,12 +21,15 @@ int is_palindrome(listint_t **head)
 	/*Determine if a non-empty list is a palindrome*/
 	half_l = len / 2;
 	curr = *head;
-	while (half_l > 1)
+	while (half_l > 0)
 	{
+		/*printf("curr: %d\n", curr->n);*/
+		/*printf("tail: %d\n", tail->n);*/
 		if (curr->n != tail->n)
 			return (0);
 		curr = curr->next;
-		for (before = curr; before->next != tail; before = before->next)
+		before = curr;
+		for (; before != tail && before->next != tail; before = before->next)
 			;
 		/*printf("before: %d\n", before->n);*/
 		tail = before;

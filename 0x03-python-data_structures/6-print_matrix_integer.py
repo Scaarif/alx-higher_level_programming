@@ -11,9 +11,13 @@ def print_matrix_integer(matrix=[[]]):
         # Access each row in the matrix
         for row in matrix:
             # Access the elements in a row
-            for i in range(len(row) - 1):
-                print("{}".format(row[i]), end=" ")
-            # print last element & jump to new row
-            print("{}".format(row[i + 1]))
+            if len(row) > 1:
+                for i in range(len(row) - 1):
+                    print("{:d}".format(row[i]), end=" ")
+                # print last element & jump to new row
+                print("{:d}".format(row[i + 1]))
+            else:
+                # print the one element in the row and jump to next row
+                print("{:d}".format(row[0]))
     else:
         print()  # print an empty line if matrix empty
