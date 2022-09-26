@@ -3,7 +3,7 @@ def delete_at(my_list=[], idx=0):
     """ Deletes the element at index idx in a list
     Args:
         my_list: a list of integers
-        idx: index of the element to delete 
+        idx: index of the element to delete
     Returns:
         The modified list
     """
