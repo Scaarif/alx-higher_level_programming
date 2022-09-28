@@ -8,8 +8,5 @@ def square_matrix_simple(matrix=[]):
     """
     squares = matrix[:]
     if len(matrix[0]):
-        for r in range(len(squares)):
-            for i in range(len(squares[r])):
-                squares[r][i] = squares[r][i] ** 2
-        return squares
+        return [list(map(lambda n: n**2, sublist)) for sublist in matrix]
     return matrix
