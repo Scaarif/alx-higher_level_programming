@@ -21,7 +21,7 @@ def add_tuple(tuple_a=(), tuple_b=()):
         tuple_a = (tuple_a[0], 0)
     elif len(tuple_b) == 1:
         tuple_b = (tuple_b[0], 0)
-    # Add up only the first wo elements in the tuples
+    # Add up only the first two elements in the tuples
     for i in range(2):
         sum_ = (tuple_a[i] + tuple_b[i])
         ans.append(sum_)
