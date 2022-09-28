@@ -6,7 +6,6 @@ def square_matrix_simple(matrix=[]):
     Return:
         the new squares matrix
     """
-    squares = matrix[:]
     if len(matrix[0]):
         return [list(map(lambda n: n**2, sublist)) for sublist in matrix]
     return matrix
