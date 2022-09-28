@@ -7,5 +7,5 @@ def square_matrix_simple(matrix=[]):
         the new squares matrix
     """
     if len(matrix[0]):
-        return [list(map(lambda n: n**2, sublist)) for sublist in matrix]
+        return [list(map(lambda x: x**2, row)) for row in matrix]
     return matrix
