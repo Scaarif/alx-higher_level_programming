@@ -6,9 +6,11 @@ def square_matrix_simple(matrix=[]):
     Return:
         the new squares matrix
     """
-    squares = []
-    if len(matrix):
-        for row in matrix:
-            squares += [list(map((lambda x: x ** 2), row))]
+    squares = matrix[:]
+    print(squares)
+    if len(matrix[0]):
+        for r in range(len(squares)):
+            for i in range(len(squares[r])):
+                squares[r][i] = squares[r][i] ** 2
         return squares
     return matrix
