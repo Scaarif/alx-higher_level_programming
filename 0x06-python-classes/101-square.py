@@ -16,7 +16,7 @@ class Square:
         if size = 0, substitutes an empty line """
         sqr = ''
         if self.__size <= 0:
-            sqr += '\n'  # rep as an empty line 
+            sqr += '\n'  # rep as an empty line
         else:
             rows = 0
             # if self.__position[1] > 0:
@@ -35,7 +35,6 @@ class Square:
                 sqr += '\n'
                 rows += 1
             return sqr
-
 
     @property
     def size(self):
