@@ -10,10 +10,6 @@ class MagicClass:
         # else
         self.__radius = radius
 
-    @property
-    def radius(self):
-        return self.__radius
-
     def area(self, radius):
         """ returns the area """
         return self.__radius ** 2 * math.pi
