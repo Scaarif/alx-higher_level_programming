@@ -58,10 +58,10 @@ class Square:
             print()
         else:
             rows = 0
-            # if self.__position[1] > 0:
-            #     spaces = 0
-            # else:
-            spaces = self.__position[0]
+            if self.__position[1] > 0:
+                spaces = 0
+            else:
+                spaces = self.__position[0]
             while (rows < self.__size):
                 i = 0
                 while (i < spaces):
