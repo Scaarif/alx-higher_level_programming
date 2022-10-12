@@ -40,7 +40,7 @@ class Square:
     def position(self, value):
         """ setter method for the position attribute """
         # check that position is a 2 positive ints tuple
-        if ((type(value) is not tuple) or (len(tuple) != 2) 
+        if ((type(value) is not tuple) or (len(tuple) != 2)
                 or (type(value[0]) is not int)
                 or (type(value[1]) is not int)
                 or (x < 0 for x in value)):
