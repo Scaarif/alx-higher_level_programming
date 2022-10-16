@@ -1,0 +1,33 @@
+# 0-add_integer.py
+==============================================================
+ Testing the functions defined in the module 0-add_integer.py 
+===============================================================
+The function add_integer() simply adds two integers
+The integers must be either foat or int and an exception, TypeError
+is raised if any of the parameters provided does not qualfy as either
+Single Argument
+==================
+>>> add = __import__('0-add_integer').add_integer
+>>> add(2)
+100
+
+Integers (Ints & Floats)
+========================
+>>> add(2, 3)
+5
+>>> add(2.0, 3.0)
+5
+>>> add(2.0, 3)
+5
+>>> add(3.0, -2)
+1
+
+Other arg types
+=================
+>>> add('a')
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add(2, 'a')
+Traceback (most recent call last):
+TypeError: b must be an integer

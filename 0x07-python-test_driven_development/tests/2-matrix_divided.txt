@@ -1,0 +1,30 @@
+# 2-matrix_divided.py
+==============================================================
+ Testing the functions defined in the module 2-matrix_divided.py 
+===============================================================
+The function matrix_divided() simply divides the elements of a matrix by an int div
+The integers must be either float or int and an exception, TypeError
+is raised if any of the parameters provided does not qualify as either
+Integer Arguments
+==================
+>>> div = __import__('2-matrix_divided').matrix_divided
+>>> mat = [[1,2,3],[4,5,6]]
+>>> div(mat, 2)
+[[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
+>>> div(mat, -2)
+[[-0.5, -1.0, -1.5], [-2.0, -2.5, -3.0]]
+>>> div(mat, 0)
+Traceback (most recent call last):
+ZeroDivisionError: division by zero
+
+Other cases:
+=================
+Empty matrix
+
+>>> div([[], []], 2)
+[[], []]
+
+Incorrect type or args
+>>> div(2, 'a')
+Traceback (most recent call last):
+TypeError: matrix must be a matrix(list of lists)                of integers/floats

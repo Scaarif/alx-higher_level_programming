@@ -1,0 +1,32 @@
+# 4-print_square.py
+==============================================================
+ Testing the functions defined in the module 4-print_square.py 
+===============================================================
+The function print_square() simply prints a square of size (size) with characters, #.
+The arg must be an integer and an exception, TypeError
+is raised if any of the parameters provided does not qualify.
+The value must also be greater positive and a ValueError is raised otherwise
+Integer Arguments
+==================
+>>> sqr = __import__('4-print_square').print_square
+>>> sqr(6)
+######
+######
+######
+######
+######
+######
+>>> sqr(0)
+>>> sqr(-2)
+Traceback (most recent call last):
+ValueError: size must be >= 0
+>>> sqr('2')
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+Other cases:
+=================
+No Argument
+>>> sqr()
+Traceback (most recent call last):
+TypeError: print_square() missing 1 required positional argument: 'size'

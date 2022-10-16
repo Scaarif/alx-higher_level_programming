@@ -1,0 +1,27 @@
+# 5-text_indentation.py
+==============================================================
+ Testing the functions defined in the module 5-text_indentation.py 
+===============================================================
+The function text_indentation() simply prints a text, adding two lines to every on every
+encounter of the characters '., ?, :'
+The arg must be a string and an exception, TypeError
+is raised if any of the parameter provided does not qualify.
+
+String Arguments
+==================
+>>> string = __import__('5-text_indentation').text_indentation
+>>> string("Well, hello there. How are you?")
+Well, hello there.
+<BLANKLINE>
+How are you?
+<BLANKLINE>
+>>> string(-2)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+Other cases:
+=================
+No Argument
+>>> string()
+Traceback (most recent call last):
+TypeError: text_indentation() missing 1 required positional argument: 'text'
