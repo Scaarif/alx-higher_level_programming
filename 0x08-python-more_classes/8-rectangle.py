@@ -25,7 +25,7 @@ class Rectangle:
     def width(self, value):
         """ setter for the width attribute """
         # check that value is an integer & positive
-        if type(value) not in [int, float]:
+        if type(value) not in [int]:
             raise TypeError('width must be an integer')
         elif value < 0:
             raise ValueError('width must be >=0')
@@ -41,7 +41,7 @@ class Rectangle:
     def height(self, value):
         """ setter for the height attribute """
         # check that value is an integer & positive
-        if type(value) not in [int, float]:
+        if type(value) not in [int]:
             raise TypeError('height must be an integer')
         elif value < 0:
             raise ValueError('height must be >=0')
