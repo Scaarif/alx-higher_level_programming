@@ -3,6 +3,7 @@
 
 
 class Rectangle:
+    """ create the class Rectangle """
     def __init__(self, width=0, height=0):
         """ Initialize a class instance with attributes """
         self.__width = width
