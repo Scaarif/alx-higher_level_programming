@@ -25,7 +25,7 @@ class Rectangle:
     def width(self, value):
         """ setter for the width attribute """
         # check that value is an integer & positive
-        if type(value) not in [int]:
+        if type(value) not in [int, float]:
             raise TypeError('width must be an integer')
         elif value < 0:
             raise ValueError('width must be >=0')
@@ -41,7 +41,7 @@ class Rectangle:
     def height(self, value):
         """ setter for the height attribute """
         # check that value is an integer & positive
-        if type(value) not in [int]:
+        if type(value) not in [int, float]:
             raise TypeError('height must be an integer')
         elif value < 0:
             raise ValueError('height must be >=0')
@@ -70,7 +70,7 @@ class Rectangle:
         elif not isinstance(rect_2, Rectangle):
             raise TypeError('rect_2 must be an instance of a rectangle')
         else:
-            # compare the areas by calling the area() methods...
+            # compare the areas by calling the area()
             if rect_1.area() >= rect_2.area():
                 return rect_1
             # otherwise...
