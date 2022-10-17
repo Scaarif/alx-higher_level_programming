@@ -28,8 +28,8 @@ def matrix_mul(m_a, m_b):
             # check that all elements are ints/floats
             for char in elem:
                 if type(char) not in [int, float]:
-                    raise TypeError(f'{names[idx]} should contain only integers \
-                    or floats')
+                    raise TypeError(f'{names[idx]} should contain only \
+                    integers or floats')
             # check that each row (elem) has the same no of cols(char)
             d_cols = len(a_list[0])  # get the first row's cols if list
             r_cols = len(elem)  # no of cols in a row
