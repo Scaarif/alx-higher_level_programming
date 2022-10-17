@@ -15,7 +15,7 @@ class Square:
         """ represents the square as #'s (i.e. area characters)
         if size = 0, substitutes an empty line """
         sqr = ''
-        if self.__size <= 0:
+        if self.__size == 0:
             sqr += '\n'  # rep as an empty line
         else:
             rows = 0
@@ -23,18 +23,23 @@ class Square:
             #     spaces = 0
             # else:
             spaces = self.__position[0]
-            while (rows < self.__size):
-                i = 0
-                while (i < spaces):
-                    sqr += ' '
-                    i += 1
-                cols = 0
-                while (cols < self.__size):
-                    sqr += '#'
-                    cols += 1
+            blanks = self.__position[1]
+            for blank in range(blanks):
                 sqr += '\n'
+            while (rows < self.__size):
+                sqr += ' ' * spaces + '#' * self.__size
+                # i = 0
+                # while (i < spaces):
+                #     sqr += ' '
+                #     i += 1
+                # cols = 0
+                # while (cols < self.__size):
+                #     sqr += '#'
+                #     cols += 1
+                if rows < (self.__size - 1):
+                    sqr += '\n'
                 rows += 1
-            return sqr
+        return sqr
 
     @property
     def size(self):
@@ -67,7 +72,7 @@ class Square:
         # check that position is a 2 positive ints tuple
         if ((type(value) is not tuple) or (len(tuple) != 2)
                 or (type(value[0]) is not int) or (type(value[1]) is not int)
-                or (x < 0 for x in value)):
+                or (value[0] < 0 or value[1] < 0)):
             raise TypeError("position must be a tuple of 2 integers")
         else:
             self.__position = value
