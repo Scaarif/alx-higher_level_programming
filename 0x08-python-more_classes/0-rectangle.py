@@ -3,5 +3,5 @@
 
 
 class Rectangle:
-    # class attributes go here
+    """ class attributes go here """
     pass
