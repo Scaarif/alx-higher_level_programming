@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # 101-nqueens.py
-""" Solving the N-queens puzzle - determining all 
+""" Solving the N-queens puzzle - determining all
 possible solutions to placing N non-attacking queens
 on an NxN chessboard.
     solutions (list): A list of lists containing solutions.
