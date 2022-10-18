@@ -11,8 +11,8 @@ class Rectangle:
 
     def __init__(self, width=0, height=0):
         """ Initialize a class instance with attributes """
-        self.__width = width
-        self.__height = height
+        self.width = width
+        self.height = height
         # increment the class attr on each instantiation
         Rectangle.number_of_instances += 1
 
@@ -66,9 +66,9 @@ class Rectangle:
         returns the larger. Returns rect_1 if equal """
         # check that both values are Rectangle instances
         if not isinstance(rect_1, Rectangle):
-            raise TypeError('rect_1 must be an instance of a rectangle')
+            raise TypeError('rect_1 must be an instance of Rectangle')
         elif not isinstance(rect_2, Rectangle):
-            raise TypeError('rect_2 must be an instance of a rectangle')
+            raise TypeError('rect_2 must be an instance of Rectangle')
         else:
             # compare the areas by calling the area()
             if rect_1.area() >= rect_2.area():
