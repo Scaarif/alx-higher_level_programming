@@ -11,16 +11,16 @@ def matrix_divided(matrix, div):
     Raises exceptions if the above enforcements aren't adhered to
     """
     if type(matrix) is not list:
-        raise TypeError('matrix must be a matrix (list of lists)' \
-                ' of integers/floats')
+        raise TypeError('matrix must be a matrix (list of lists)'
+                        ' of integers/floats')
     for row in matrix:
         if (type(row) is not list):
-            raise TypeError('matrix must be a matrix (list of lists) '\
-                'of integers/floats')
+            raise TypeError('matrix must be a matrix (list of lists) '
+                            'of integers/floats')
         for elem in row:
             if (type(elem) not in [int, float]):
-                raise TypeError('matrix must be a matrix (list of lists) '\
-                    'of integers/floats')
+                raise TypeError('matrix must be a matrix (list of lists) '
+                                'of integers/floats')
     length = len(matrix[0])
     for row in matrix:
         if not (len(row) == length):

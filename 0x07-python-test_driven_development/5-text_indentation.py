@@ -30,7 +30,7 @@ def text_indentation(text):
                     len_ += 1
         else:
             if (skip):
-                while(skip):
+                while (skip):
                     skip -= 1
             else:
                 print(char, end="")
