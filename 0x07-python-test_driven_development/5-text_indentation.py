@@ -23,13 +23,15 @@ def text_indentation(text):
             print(char)
             print()
             len_ += 1
-            # Skip the space character right after a flag
+            # Skip the space character(s) right after a flag
             if len_ < length:
-                if text[len_] == ' ':
-                    skip = 1
+                while (text[len_] == ' '):
+                    skip += 1
+                    len_ += 1
         else:
-            if skip:
-                skip = 0
+            if (skip):
+                while(skip):
+                    skip -= 1
             else:
                 print(char, end="")
             len_ += 1

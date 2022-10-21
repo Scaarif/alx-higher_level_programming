@@ -25,17 +25,20 @@ def matrix_mul(m_a, m_b):
         for elem in a_list:
             if type(elem) is not list:
                 raise TypeError(f'{names[idx]} must be a list of lists')
+            # check that a matrix-list is not empty
+            if len(elem) == 0:
+                raise ValueError(f'{names[idx]} can\'t be empty')
             # check that all elements are ints/floats
             for char in elem:
                 if type(char) not in [int, float]:
-                    raise TypeError(f'{names[idx]} should contain only \
-                    integers or floats')
+                    raise TypeError(f'{names[idx]} should contain only ' \
+                    'integers or floats')
             # check that each row (elem) has the same no of cols(char)
             d_cols = len(a_list[0])  # get the first row's cols if list
             r_cols = len(elem)  # no of cols in a row
             if r_cols != d_cols:
-                raise TypeError(f'each row of {names[idx]} must be of the \
-                same size')
+                raise TypeError(f'each row of {names[idx]} must be of the ' \
+                'same size')
     # check that the matrices can be multiplied
     rows = len(m_b)
     cols = len(m_a[0])

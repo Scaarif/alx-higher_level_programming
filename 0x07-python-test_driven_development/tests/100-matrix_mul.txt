@@ -15,7 +15,7 @@ Valid Matrix Arguments
 >>> mat2 = [[1, 2], [3, 4]]
 >>> matrix(mat1, mat2)
 [[7, 10], [15, 22]]
->>> matrix([], [[]])
+>>> matrix([[]], [[]])
 Traceback (most recent call last):
 ValueError: m_a can't be empty
 >>> matrix([[1,2], [3,4]], [])
@@ -26,13 +26,13 @@ Traceback (most recent call last):
 ValueError: m_a and m_b can't be multiplied
 >>> matrix([[1,2], [3,4]], [[2,3,4], [5,6]])
 Traceback (most recent call last):
-TypeError: each row of m_b must be of the                 same size
+TypeError: each row of m_b must be of the same size
 >>> matrix([[2,3,4], [5,6,7]], [1,2,3,4])
 Traceback (most recent call last):
 TypeError: m_b must be a list of lists
 >>> matrix([[1,2], [3,4]], [[2,3,4], [5,6,'7']])
 Traceback (most recent call last):
-TypeError: m_b should contain only                     integers or floats
+TypeError: m_b should contain only integers or floats
 >>> matrix([[1,2], [3,4.665]], [[2,3,4], [5,6.6,7]])
 [[12, 16.2, 18], [29.325, 39.789, 44.655]]
 

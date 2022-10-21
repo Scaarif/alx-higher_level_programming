@@ -28,6 +28,10 @@ Other arg types
 Traceback (most recent call last):
 TypeError: a must be an integer
 
+>>> add()
+Traceback (most recent call last):
+TypeError: a must be an integer
+
 >>> add(2, 'a')
 Traceback (most recent call last):
 TypeError: b must be an integer
