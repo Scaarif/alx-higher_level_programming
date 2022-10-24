@@ -4,7 +4,12 @@
 
 /**
  * check_cycle - detects presence of a loop in a list
- * @list: the list to check
+ * @list: pointer to the head of the list to check
+ * Description: two trackers are used, a Fast(F) and Slow(S)
+ * moving nodes. If the nodes ever meet (i.e. are equal at a
+ * point during the movement, then a cycle exists in the list
+ * - logically, since F moves 2 nodes at a time while S moves
+ *   only a node at a time)
  * Return: 1 if loop and 0 otherwise
  */
 int check_cycle(listint_t *list)
