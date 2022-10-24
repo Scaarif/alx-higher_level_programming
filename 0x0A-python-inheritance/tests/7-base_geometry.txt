@@ -1,0 +1,24 @@
+# 7-base_geometry.py
+==============================================================
+ Testing the class defined in the module 7-base_geometry.py 
+===============================================================
+The class BaseGeometry defines a simple geometry class with attributes and methods.
+Verifies that the attribute, value is an integer and raises an error if that
+is not the case.
+
+Instantiation & Success Cases 
+==============================
+>>> geometry = __import__('7-base_geometry').BaseGeometry
+>>> test = geometry() 
+>>> test #doctest: +ELLIPSIS
+<7-base_geometry.BaseGeometry object at 0x...>
+>>> test.integer_validator('my_int', 12)
+>>> test.integer_validator('width', 89)
+>>> test.integer_validator(3, 89)
+
+Fail cases
+========================
+>>> test.integer_validator('name', 'John')
+Traceback (most recent call last):
+TypeError: name must be an integer
+>>>
