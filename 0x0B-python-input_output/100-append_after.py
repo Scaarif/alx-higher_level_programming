@@ -8,14 +8,17 @@ def append_after(filename="", search_string="", new_string=""):
     contains the search_str """
     # check that the filename and the other args are provided
     if filename and search_string and new_string:
-        with open(filename, mode='r+', encoding='utf-8') as f:
+        new_file_txt = ""
+        with open(filename, encoding='utf-8') as f:
             # search the search_string in f
             while True:
                 line = f.readline()
                 if line:
+                    new_file_txt += line
                     if search_string in line:
-                        offset = f.tell()
-                        f.seek(offset, 0)  # go to the offset
-                        f.write(new_string)
+                        new_file_txt += new_string
                 else:
                     break
+        # write the new contents to the file
+        with open(filename, mode='w', encoding='utf-8') as f:
+            f.write(new_file_txt)
