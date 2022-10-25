@@ -11,11 +11,10 @@ load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 # add all arguments to a Python list, and then save them to a file
 filename = 'add_item.json'
 # load the existing contents of the list if file already exists
-args = []
 try:
     args = load_from_json_file(filename)
 except Exception:
-    pass
+    args = []
 # get the args (from cmd-line) to add to the list
 if len(sys.argv) - 1:
     idx = 1
@@ -26,5 +25,5 @@ if len(sys.argv) - 1:
 save_to_json_file(args, filename)
 # read(load) the contents saved to json file
 # print(load_from_json_file(filename)) - prints Python Object
-with open(filename, encoding='utf-8') as f:
-    print(f.read())  # prints json object
+# with open(filename, encoding='utf-8') as f:
+# print(f.read())  # prints json object
