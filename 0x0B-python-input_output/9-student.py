@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Defines a class Student that defines a student """
-import json
 
 
 class Student(object):
@@ -15,6 +14,7 @@ class Student(object):
         """ serializes serializable bits of the object(self) and returns
         a dictionary description with simple data structure for JSON """
         class_dict = {}
+        serializable = [list, str, dict, int, bool]
         # try to serialize the attributes of an object
         attr_list = dir(self)
         # check if class_Name is defined
@@ -23,17 +23,10 @@ class Student(object):
         # get the index of __weakref__
         start = attr_list.index('__weakref__') + 1
         while start < len(attr_list):
-            error = 1
-            try:
-                val = getattr(self, attr_list[start])
-                json.dumps(val)
-                error = 0
-            # if not serializable, pass
-            except Exception:
-                pass  # do nothing
-            # add the serialized object to a dictionary object
-            # as value with the object name as key
-            if not error:
+            val = getattr(self, attr_list[start])
+            if type(val) in serializable:
+                # add the serialized object to a dictionary object
+                # as value with the object name as key if serializable
                 attr = attr_list[start]
                 # print("attr:", attr)
                 class_dict[attr] = val
