@@ -15,7 +15,7 @@ def append_after(filename="", search_string="", new_string=""):
                 if line:
                     if search_string in line:
                         offset = f.tell()
-                        f.seek(offset, 0)  #go to the offset
+                        f.seek(offset, 0)  # go to the offset
                         f.write(new_string)
                 else:
                     break
