@@ -19,6 +19,7 @@ def add_attribute(obj, name, value):
             raise TypeError('can\'t add new attribute')
 
 
+'''
 if __name__ == "__main__":
     class Test():
         __slots__ = ["first_name"]
@@ -29,3 +30,4 @@ if __name__ == "__main__":
         print(a.name)
     except Exception as e:
         print("[{}] {}".format(e.__class__.__name__, e))
+'''
