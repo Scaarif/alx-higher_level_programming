@@ -16,14 +16,20 @@ try:
 except Exception:
     args = []
 # get the args (from cmd-line) to add to the list
+'''
 if len(sys.argv) - 1:
     idx = 1
     while idx < len(sys.argv):
         args.append(sys.argv[idx])
         idx += 1
+'''
+# the same could be achieved by this one line:
+args.extend(sys.argv[1:])
 # save the args (object) into a json file, add_item.json
 save_to_json_file(args, filename)
 # read(load) the contents saved to json file
-# print(load_from_json_file(filename)) - prints Python Object
-# with open(filename, encoding='utf-8') as f:
-# print(f.read())  # prints json object
+'''
+print(load_from_json_file(filename)) - prints Python Object
+with open(filename, encoding='utf-8') as f:
+    print(f.read())  # prints json object
+'''

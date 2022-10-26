@@ -9,6 +9,8 @@ class Rectangle(BaseGeometry):
         """ Initializes the class with attributes
         width and height """
         # validate values with super().integer_validator
-        super().integer_validator('height', height)
+        values = [('width', width), ('height', height)]
+        for value in values:
+            super().integer_validator(value[0], value[1])
         self.__height = height
         self.__width = width
