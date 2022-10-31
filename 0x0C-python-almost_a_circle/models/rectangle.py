@@ -105,10 +105,35 @@ class Rectangle(Base):
                 + str(self.y) + " - " + str(self.width) + "/"
                 + str(self.height))
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """ assigns an argument to each attribute in the order:
         id, width, height, x & y - i.e. no-keyword arguments
+        Alternatively assigns keyword args (**kwargs) if
+        *args isn't given or is empty
         """
-        args_list = ['id', 'width', 'height', 'x', 'y']
-        for idx, arg in enumerate(args):
-            setattr(self, args_list[idx], arg)
+        # check if args is provided and that args isn't empty
+        if args and len(args) > 0:
+            args_list = ['id', 'width', 'height', 'x', 'y']
+            for idx, arg in enumerate(args):
+                setattr(self, args_list[idx], arg)
+        # else (if args is empty/ undefined, only then use **kwargs)
+        else:
+            for attr, value in kwargs.items():
+                setattr(self, attr, value)
+
+    def to_dictionary(self):
+        """ returns a dictionary representation of a Rectangle """
+        attr_dict = getattr(self, '__dict__', None)
+        if attr_dict:
+            '''attr_list = ['id', 'width', 'height', 'x', 'y']
+            ret_dict = {}'''
+            new = {}
+            for key, value in attr_dict.items():
+                '''for name in attr_list:
+                    if name == key[(len(key) - len(name)):]:
+                        ret_dict[name] = value
+                        break'''
+                new[key.lstrip('_Rectangle__')] = value
+            # print("new", new)
+            return new
+        return {}
