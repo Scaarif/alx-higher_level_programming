@@ -70,3 +70,31 @@ class Base:
             ret_list = []
         ret_list = json.loads(json_string)
         return ret_list
+
+    @classmethod
+    def create(cls, **dictionary):
+        """ returns an instance with all attributes already set """
+        # instantiate a dummy instance of cls (with attrs)
+        dummy = cls(2, 2)  # an instance of a rectangle
+        dummy.update(**dictionary)
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """ returns a list of instances """
+        filename = f'{cls.__name__}.json'
+        try:
+            with open(filename, mode='r', encoding='utf-8') as f:
+                # the file holds a str (list of dictionaries of instances
+                json_str = f.read()
+                # deserialize the str (into a dict/list?) of the dicts?
+                dict_list = cls.from_json_string(json_str)
+                # print("dict_list:", dict_list)
+                instances = []
+                for a_dict in dict_list:
+                    instance = cls.create(**a_dict)
+                    # print('instance:', instance)
+                    instances.append(instance)
+                return instances
+        except FileNotFoundError:
+            return []  # return an empty list
