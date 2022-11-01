@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Defines tests class for the Square class in square module """
 import unittest
 from models.square import Square

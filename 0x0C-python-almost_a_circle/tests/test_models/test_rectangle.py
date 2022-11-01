@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Defines tests for the Rectangle class in rectangle module
 <rectangle.py> """
 from models.rectangle import Rectangle

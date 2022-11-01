@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Defines tests for the base module <base.py> """
 from models.base import Base
 from models.rectangle import Rectangle
