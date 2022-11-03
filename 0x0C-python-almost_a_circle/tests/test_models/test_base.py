@@ -13,7 +13,7 @@ class TestBaseClass(unittest.TestCase):
         base = Base()
         base1 = Base()
         self.assertEqual(base.id, 1)
-        self.assertEqual(base.id, 2)
+        self.assertEqual(base1.id, 2)
 
 
     def test_with_id_instance(self):
