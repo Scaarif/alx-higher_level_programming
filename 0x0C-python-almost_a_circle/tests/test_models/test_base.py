@@ -11,7 +11,10 @@ class TestBaseClass(unittest.TestCase):
     def test_zero_args_instance(self):
         """ should instantiate since id has a default value, 0 """
         base = Base()
-        self.assertIsInstance(base, Base)
+        base1 = Base()
+        self.assertEqual(base.id, 1)
+        self.assertEqual(base.id, 2)
+
 
     def test_with_id_instance(self):
         """ should instantiate with an id = 20 """
