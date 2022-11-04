@@ -2,11 +2,17 @@
 """ Defines tests for the Rectangle class in rectangle module
 <rectangle.py> """
 from models.rectangle import Rectangle
+from models.base import Base
 import unittest
 
 
 class TestRectangleClass(unittest.TestCase):
     """ Create a class with tests for the Rectangle class """
+    def setUp(self):
+        """ setup class instances for use in tests """
+        self.rect = Rectangle(5, 5)
+        self.rect1 = Rectangle(5, 6, 1, 0)
+
     def test_valid_instance(self):
         """ should instantiate, positional args provided """
         rect = Rectangle(2, 2)
@@ -20,46 +26,8 @@ class TestRectangleClass(unittest.TestCase):
 
     def test_instance_inheritance(self):
         """ should return correct id values, w.r.t whether id is defined """
-        rect1 = Rectangle(2, 2)
-        rect2 = Rectangle(2, 2)
-        rect3 = Rectangle(2, 2)
         rect4 = Rectangle(2, 2, 1, 1, 10)
-        rect5 = Rectangle(2, 2, 1, 1)
-        self.assertEqual(rect1.id, 2)
-        self.assertEqual(rect2.id, 3)
-        self.assertEqual(rect3.id, 4)
         self.assertEqual(rect4.id, 10)
-        self.assertEqual(rect5.id, 5)
-
-    def test_invalid_float_width(self):
-        """ should raise an exception - TypeError """
-        with self.assertRaises(TypeError):
-            rect = Rectangle(2.5, 7)
-
-    def test_invalid_string_width(self):
-        """ should raise an exception - TypeError """
-        with self.assertRaises(TypeError):
-            rect = Rectangle('2.5', 7)
-
-    def test_invalid_zero_width(self):
-        """ should raise an exception - ValueError """
-        with self.assertRaises(ValueError):
-            rect = Rectangle(0, 0)
-
-    def test_invalid_float_height(self):
-        """ should raise an exception - TypeError """
-        with self.assertRaises(TypeError):
-            rect = Rectangle(2, 7.0)
-
-    def test_invalid_zero_height(self):
-        """ should raise an exception - TypeError """
-        with self.assertRaises(ValueError):
-            rect = Rectangle(2, 0)
-
-    def test_invalid_negative_height(self):
-        """ should raise an exception - ValueError """
-        with self.assertRaises(ValueError):
-            rect = Rectangle(2, -1)
 
     def test_valid_x(self):
         """ should instantiate, update x to 2 """
@@ -74,7 +42,7 @@ class TestRectangleClass(unittest.TestCase):
     def test_invalid_negative_x(self):
         """ should raise an exception - ValueError """
         with self.assertRaises(ValueError):
-            rect = Rectangle(2, 2, -2)
+            self.rect.x = -1
 
     def test_invalid_negative_y(self):
         """ should raise an exception - ValueError """
