@@ -50,6 +50,22 @@ class TestBaseClass(unittest.TestCase):
         with open("Rectangle.json", "r") as file:
             self.assertTrue(len(file.read()) > 0)
 
+    def test_save_to_file_None(self):
+        Square.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual("[]", f.read())
+
+    def test_save_to_file_empty_list(self):
+        Square.save_to_file([])
+        with open("Square.json", "r") as f:
+            self.assertEqual("[]", f.read())
+
+    def test_save_to_file_single_object(self):
+        s = Square(10, 7, 2, 8)
+        Base.save_to_file([s])
+        with open("Base.json", "r") as f:
+            self.assertTrue(len(f.read()) > 0)
+
     '''def test_save_to_file_overwrite(self):
         """ should overwrite content in <class name>.json """
         r1 = Rectangle(10, 7, 2, 8)
@@ -135,3 +151,8 @@ class TestBaseClass(unittest.TestCase):
         """ should raise an exception - ValueError """
         with self.assertRaises(ValueError):
             rect = Rectangle(2, -1)
+
+    def test_invalid_negative_width(self):
+        """ should raise an exception - ValueError """
+        with self.assertRaises(ValueError):
+            rect = Rectangle(-2, 1)

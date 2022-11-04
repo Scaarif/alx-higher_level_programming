@@ -5,6 +5,7 @@ NOTE:
     in a folder (the package folder eg this models folder)
 """
 import json
+import csv
 
 
 class Base:
@@ -38,10 +39,10 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """ writes the JSON string representation of lisr_objs
+        """ writes the JSON string representation of list_objs
         to a file:
         Args:
-            list_objs: a list of instances who inherits of Base
+            list_objs: a list of instances who inherits from Base
             cls: the class of said instances eg Square or Rectangle
         """
         # check if list_objs is provided
@@ -98,3 +99,41 @@ class Base:
                 return instances
         except FileNotFoundError:
             return []  # return an empty list
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """serializes a list of Rectangles/Squares in csv"""
+        filename = f'{cls.__name__}.csv'
+        with open(filename, 'w', newline='') as f:
+            csv_writer = csv.writer(f)
+            if cls.__name__ == 'Rectangle':
+                for obj in list_objs:
+                    csv_writer.writerow([obj.id, obj.width, obj.height,
+                                         obj.x, obj.y])
+            elif cls.__name__ == 'Square':
+                for obj in list_objs:
+                    csv_writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """deserializes a list of Rectangles/Squares in csv"""
+        filename = f'{cls.__name__}.csv'
+        ret_list = []
+        try:
+            with open(filename, 'r') as f:
+                csv_reader = csv.reader(f)
+                for args in csv_reader:
+                    if cls.__name__ == 'Rectangle':
+                        dictionary = {'id': int(args[0]),
+                                      'width': int(args[1]),
+                                      'height': int(args[2]),
+                                      'x': int(args[3]),
+                                      'y': int(args[4])}
+                    elif cls.__name__ == 'Square':
+                        dictionary = {'id': int(args[0]), 'size': int(args[1]),
+                                      'x': int(args[2]), 'y': int(args[3])}
+                    obj = cls.create(**dictionary)
+                    ret_list.append(obj)
+        except FileNotFoundError:
+            pass
+        return ret_list

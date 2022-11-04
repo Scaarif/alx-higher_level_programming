@@ -4,6 +4,8 @@
 from models.rectangle import Rectangle
 from models.base import Base
 import unittest
+import io
+import sys
 
 
 class TestRectangleClass(unittest.TestCase):
@@ -13,10 +15,22 @@ class TestRectangleClass(unittest.TestCase):
         self.rect = Rectangle(5, 5)
         self.rect1 = Rectangle(5, 6, 1, 0)
 
-    def test_valid_instance(self):
+    def test_valid_instance_2_args(self):
         """ should instantiate, positional args provided """
         rect = Rectangle(2, 2)
-        self.assertEqual(rect.width, 2)
+        self.assertIsInstance(rect, Base)
+
+    def test_valid_instance_3_args(self):
+        """ should instantiate, positional args provided """
+        rect = Rectangle(2, 2, 3)
+        rect1 = Rectangle(2, 2, 1)
+        self.assertTrue(rect.id, rect1.id - 1)
+
+    def test_valid_instance_4_args(self):
+        """ should instantiate, positional args provided """
+        rect = Rectangle(2, 2, 1, 1)
+        rect1 = Rectangle(2, 2, 1, 1)
+        self.assertTrue(rect.id, rect1.id - 1)
 
     def test_zero_args_instance(self):
         """ should fail to instantiate, positional args:
@@ -42,18 +56,22 @@ class TestRectangleClass(unittest.TestCase):
     def test_invalid_negative_x(self):
         """ should raise an exception - ValueError """
         with self.assertRaises(ValueError):
-            self.rect.x = -1
+            rect = Rectangle(2, 2, -1, 4)
 
     def test_invalid_negative_y(self):
         """ should raise an exception - ValueError """
         with self.assertRaises(ValueError):
             rect = Rectangle(2, 2, 0, -2)
 
-    '''def test_invalid_string_width(self):
-        """ should raise an exception - TypeError"""
-        rect = Rectangle(1, 1)
+    def test_invalid_string_x(self):
+        """ should raise an exception - TypeError """
         with self.assertRaises(TypeError):
-            rect.width = '12' '''
+            rect = Rectangle(2, 2, '1', 4)
+
+    def test_invalid_string_y(self):
+        """ should raise an exception - TypeError """
+        with self.assertRaises(TypeError):
+            rect = Rectangle(2, 2, 0, '2')
 
     def test_area(self):
         """ should return width * height """
@@ -107,3 +125,49 @@ class TestRectangleClass(unittest.TestCase):
         for key in the_dict:
             self.assertEqual(key, attrs[idx])
             idx += 1
+
+    # Setup for testing display method
+    @staticmethod
+    def capture_stdout(rect, method):
+        """Captures and returns text printed to stdout.
+        Args:
+            rect (Rectangle): The Rectangle to print to stdout.
+            method (str): The method to run on rect.
+        Returns:
+            The text printed to stdout by calling method on rect.
+        """
+        capture = io.StringIO()
+        sys.stdout = capture
+        if method == "print":
+            print(rect)
+        else:
+            rect.display()
+        sys.stdout = sys.__stdout__
+        return capture
+
+    def test_display_width_height(self):
+        r = Rectangle(2, 3, 0, 0, 0)
+        capture = TestRectangleClass.capture_stdout(r, "display")
+        self.assertEqual("##\n##\n##\n", capture.getvalue())
+
+    def test_display_width_height_x(self):
+        r = Rectangle(3, 2, 1, 0, 1)
+        capture = TestRectangleClass.capture_stdout(r, "display")
+        self.assertEqual(" ###\n ###\n", capture.getvalue())
+
+    def test_display_width_height_y(self):
+        r = Rectangle(4, 5, 0, 1, 0)
+        capture = TestRectangleClass.capture_stdout(r, "display")
+        display = "\n####\n####\n####\n####\n####\n"
+        self.assertEqual(display, capture.getvalue())
+
+    def test_display_width_height_x_y(self):
+        r = Rectangle(2, 4, 3, 2, 0)
+        capture = TestRectangleClass.capture_stdout(r, "display")
+        display = "\n\n   ##\n   ##\n   ##\n   ##\n"
+        self.assertEqual(display, capture.getvalue())
+
+    def test_display_one_arg(self):
+        r = Rectangle(5, 1, 2, 4, 7)
+        with self.assertRaises(TypeError):
+            r.display(1)

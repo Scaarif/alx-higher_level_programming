@@ -17,6 +17,58 @@ class TestSquareClass(unittest.TestCase):
         """ should instantiate attributes via Rectangle """
         self.assertEqual(type(self.sqr), Square)
 
+    def test_valid_instance_2_args(self):
+        """ should instantiate, positional args provided """
+        rect = Square(2, 2)
+        self.assertIsInstance(rect, Square)
+
+    def test_valid_instance_3_args(self):
+        """ should instantiate, positional args provided """
+        rect = Square(2, 2, 3)
+        rect1 = Square(2, 2, 1)
+        self.assertTrue(rect.id, rect1.id - 1)
+
+    def test_valid_instance_4_args(self):
+        """ should instantiate, positional args provided """
+        rect = Square(2, 2, 1, 1)
+        rect1 = Square(2, 2, 1, 1)
+        self.assertTrue(rect.id, rect1.id - 1)
+
+    def test_validation_inheritance_zero_size(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(ValueError):
+            sqr = Square(0)
+
+    def test_validation_inheritance_negative_size(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(ValueError):
+            sqr = Square(-1)
+
+    def test_validation_inheritance_negative_x(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(ValueError):
+            sqr = Square(1, -1)
+
+    def test_validation_inheritance_negative_y(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(ValueError):
+            sqr = Square(2, 1, -1)
+
+    def test_validation_inheritance_string_size(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(TypeError):
+            sqr = Square('2')
+
+    def test_validation_inheritance_string_x(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(TypeError):
+            sqr = Square(1, '2')
+
+    def test_validation_inheritance_string_y(self):
+        """ should raise error for invalid value """
+        with self.assertRaises(TypeError):
+            sqr = Square(2, 1, '2')
+
     def test_correct_width_assignment(self):
         """ should instantiate attributes via Rectangle """
         self.assertEqual(self.sqr.width, 5)
@@ -84,12 +136,7 @@ class TestSquareClass(unittest.TestCase):
         self.assertEqual(self.sqr.size, 5)
         self.assertEqual(self.sqr.x, 78)
 
-    '''def test_to_dictionary(self):
-        """ should return a dictionary rep of an instance
-        with all attributes represented """
-        the_dict = sorted(self.sqr.to_dictionary())  # a list of keys
-        attrs = sorted(['x', 'y', 'size', 'id'])
-        idx = 0
-        for key in the_dict:
-            self.assertEqual(key, attrs[idx])
-            idx += 1'''
+    def test_to_dictionary(self):
+        s = Square(10, 2, 1, 1)
+        correct = {'id': 1, 'x': 2, 'width': 10, 'height': 10, 'y': 1}
+        self.assertDictEqual(correct, s.to_dictionary())
