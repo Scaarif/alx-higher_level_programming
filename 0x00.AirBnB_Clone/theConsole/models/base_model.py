@@ -11,15 +11,31 @@ class BaseModel:
     """ Defines all the common attributes (and methods) for all the
     other classes in the project """
     # Initialize the class
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Initializes instances of the class and assigns relevant
-        public attributes """
-        # generate a random id (using uuid4) for each instance created
-        self.id = str(uuid.uuid4())  # cast the uuid into a string
-        # assign current datetime when an object(instance) is created
-        self.created_at = datetime.now()
-        # track time of update (update it) to current time
-        self.updated_at = datetime.now()
+        public attributes.
+        Note: the instantiation is based on whether **kwargs is provided """
+        # args is not used
+        # check for **kwargs & if true, re-create an object object_dict
+        if kwargs:
+            for key, val in kwargs.items():
+                # check for time strs and convert to datetime
+                if key == 'created_at' or key == 'updated_at':
+                    self.key = val
+                    setattr(self, key, datetime.fromisoformat(val))
+                # skip __class__ (not an attribute)
+                elif key == '__class__':
+                    continue  # do nothing
+                else:
+                    setattr(self, key, val)
+        # else, kwargs undefined, initialize normally
+        else:
+            # generate a random id (using uuid4) for each instance created
+            self.id = str(uuid.uuid4())  # cast the uuid into a string
+            # assign current datetime when an object(instance) is created
+            self.created_at = datetime.now()
+            # track time of update (update it) to current time
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ formats the object on print """
