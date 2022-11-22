@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Defines tests /test cases for the base_model module <base_model.py> """
 from models.base_model import BaseModel
+from datetime import datetime
 import unittest
 
 
@@ -88,3 +89,50 @@ class TestBaseModelClass(unittest.TestCase):
         is the class_name """
         cls_dict = self.base.to_dict()
         self.assertEqual(cls_dict['__class__'], 'BaseModel')
+
+
+class TestBaseModelRecreation(unittest.TestCase):
+    """ Defines tests for the BaseModel, recreation """
+    def setUp(self):
+        """ initialize a class to use in tests """
+        self.base = BaseModel()
+        self.base.name = 'Test_Model'
+        self.base.number = 7
+        obj_dict = self.base.to_dict()
+        self.new_base = BaseModel(**obj_dict)
+
+    # test that kwargs are checked for before initializing new objects
+    def test_object_recreation_kwargs_check(self):
+        """ test that kwargs are checked for before initializing
+        new objects i.e. if provided, they are used """
+        attrs = {'name': 'Test'}
+        base1 = BaseModel(**attrs)
+        self.assertTrue('name' in (base1.__dict__).keys())
+
+    # test that datetime strings are converted back to datetime
+    def test_object_recreation_datetime_conversion(self):
+        """ test that datetime strings are converted back to
+        datetime objects """
+        self.assertTrue(isinstance(self.new_base.created_at, datetime))
+
+    # test that without kwargs, normal initialization occurs
+    def test_object_recreation_no_kwargs(self):
+        """ test that if **kwargs isn't defined, normal
+        initialization occurs """
+        self.assertTrue(self.base)
+
+    # test that args are not used
+    def test_object_recreation_args_not_used(self):
+        """ test that if **kwargs isn't defined, normal
+        initialization occurs, args aren't used """
+        args = ['Test_Model', 'hello']
+        base1 = BaseModel(*args)
+        for arg in args:
+            # assert that potential attributes (args) dont exist
+            self.assertEqual(getattr(self, arg, None), None)
+
+    # test that a __class__ attribute isn't added
+    def test_object_recreation_args__class__handled(self):
+        """ test that if **kwargs is defined, the __class__
+        key/value is not added as an attribute """
+        self.assertTrue(getattr(self.new_base, '__class__', None), None)
