@@ -5,6 +5,7 @@
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -36,6 +37,9 @@ class BaseModel:
             self.created_at = datetime.now()
             # track time of update (update it) to current time
             self.updated_at = datetime.now()
+            # call storage's new() method - adds an obj to __objects
+            # storage.new(self)  # add this instance to __objects
+            storage.new(self.to_dict())  # add this instance to __objects
 
     def __str__(self):
         """ formats the object on print """
@@ -46,6 +50,8 @@ class BaseModel:
         """ updates the public instance attribute updated_at to current
         datetime """
         self.updated_at = datetime.now()
+        # call storage's save method: serialize __objects on update
+        storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing:
