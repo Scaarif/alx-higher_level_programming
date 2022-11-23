@@ -2,6 +2,8 @@
 """ Defines the entry point to the AirBnB Console project """
 import cmd
 import sys
+from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -39,6 +41,172 @@ class HBNBCommand(cmd.Cmd):
     # override cmd.emptyline - re-executes last cmd if emptyline
     def emptyline(self):
         pass  # do nothing
+
+    # ++++ custom console commands ++++ #
+    def do_create(self, line):
+        """ <create class_name> creates a new instance of BaseModel, saves
+        it(to JSON file) & prints the id (instance's) """
+        # check that class name is included in command
+        if line:
+            if 'BaseModel' in line:
+                # create new instance & save it (call save method)
+                new = BaseModel()
+                # save the object
+                new.save()
+                # print the object's id
+                print(new.id)
+            else:
+                print('** class doesn\'t exist **')
+        else:
+            print('** class name missing **')
+
+    def do_show(self, line):
+        """ <show object_id> prints the string representation of
+        an instance based on class name and id """
+        # check that class name & id are provided along with command
+        if line:
+            args = line.split()
+            # check that class exists
+            if args[0] and args[0] != 'BaseModel':
+                print("** class doesn't exist **")
+            else:
+                # class exists, check id is provided
+                if len(args) > 1:
+                    # check that an object with [id] exists
+                    # get the string objects
+                    objects = storage.all()
+                    # search for [this_id] object representation
+                    this_key = f'{args[0]}.{args[1]}'
+                    for obj, str_rep in objects.items():
+                        if obj == this_key:
+                            # print this_obj (its str rep)
+                            print(BaseModel(**str_rep))
+                            break
+                    else:
+                        # objects exhausted before [this_obj] is found
+                        print("** no istance found **")
+                else:
+                    # id not provided (arg[1] missing)
+                    print("** instance id missing **")
+        else:
+            # line empty (no args)
+            print("** class name missing **")
+
+    def do_destroy(self, line):
+        """ <destroy class_name object_id> deletes an instance based on
+        the class name and id (& saves the change into the JSON file) """
+        # check that class name & id are provided along with command
+        if line:
+            args = line.split()
+            # check that class exists
+            if args[0] and args[0] != 'BaseModel':
+                print("** class doesn't exist **")
+            else:
+                # class exists, check id is provided
+                if len(args) > 1:
+                    # check that an object with [id] exists
+                    # get the string objects (as reloaded)
+                    objects = storage.all()
+                    # search for [this_id] object representation
+                    this_key = f'{args[0]}.{args[1]}'
+                    for obj, str_rep in objects.items():
+                        if obj == this_key:
+                            # delete the obj, str_rep pair
+                            del (objects[obj])
+                            # reserialize objects into file (to reflect change)
+                            storage.save()
+                            break
+                    else:
+                        # objects exhausted before [this_obj] is found
+                        print("** no istance found **")
+                else:
+                    # id not provided (arg[1] missing)
+                    print("** instance id missing **")
+        else:
+            # line empty (no args)
+            print("** class name missing **")
+
+    def do_all(self, line):
+        """ <all> or <all class_name> prints all string representation
+        of all instances based or not on the class name """
+        # check if class_name is provided (for filter)
+        # get all objects and only print out BaseModel instances
+        objects = storage.all()
+        obj_list = []
+        if line:
+            # check the classname provided exists
+            if line == 'BaseModel':
+                for obj, val in objects.items():
+                    obj_list.append(str(BaseModel(**val)))
+                print(obj_list)
+            else:
+                # some other class provided
+                print("** class doesn't exist **")
+        else:
+            # print all instances (no filter)
+            for obj, val in objects.items():
+                obj_list.append(str(BaseModel(**val)))
+            print(obj_list)
+
+    def do_update(self, line):
+        """ <update class_name object_id attribute_name attribute_value>
+        updates the instance [class_name.object_id]'s attribute
+        [attribute_name] to [attribute_value] if [attribute_name]
+        already exists. Adds the attribute [name]->[value] pair otherwise
+        (& saves the change into the JSON file) """
+        # check that class name & id are provided along with command
+        if line:
+            args = line.split()
+            # check that class exists
+            if args[0] and args[0] != 'BaseModel':
+                print("** class doesn't exist **")
+            else:
+                # class exists, check id is provided
+                if len(args) > 1:
+                    # check that an object with [id] exists
+                    # get the string objects (as reloaded)
+                    objects = storage.all()
+                    # search for [this_id] object representation
+                    this_key = f'{args[0]}.{args[1]}'
+                    for obj, str_rep in objects.items():
+                        if obj == this_key:
+                            # object exists: update or add attribute
+                            if len(args) > 2:
+                                # check if attribute already exists
+                                for k, val in str_rep.items():
+                                    if k == args[2]:
+                                        # attribute already exists
+                                        # check if attr_value provided
+                                        if len(args) > 3:
+                                            # attr_value provided, cast+update
+                                            str_rep[k] = type(val)(args[3])
+                                            # reserialize objects into file
+                                            storage.save()
+                                        else:
+                                            print("** value missing **")
+                                        break  # from for loop
+                                else:
+                                    # attribute doesn't exist, add it
+                                    if len(args) > 3:
+                                        # extend object dict_rep
+                                        str_rep[args[2]] = args[3]
+                                        # reserialize __objects into file
+                                        storage.save()
+                                    else:
+                                        print("** value missing **")
+                            else:
+                                # attribute_name missing
+                                print("** attribute name missing **")
+                            break
+                    else:
+                        # objects exhausted before [this_obj] is found
+                        print("** no istance found **")
+                else:
+                    # id not provided (arg[1] missing)
+                    print("** instance id missing **")
+        else:
+            # line empty (no args)
+            print("** class name missing **")
 
 
 # run the script if executed as main
