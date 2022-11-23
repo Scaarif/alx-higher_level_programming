@@ -51,8 +51,8 @@ class BaseModel:
         datetime """
         self.updated_at = datetime.now()
         # this update isn't reflected in already added obj in __objects
-        # let's change that: also include other attr added to object after initialization
-        # <needed>: access the added object(key=cls_name.id) and update its value
+        # let's change that: +include attr added to object after initialization
+        # <needed>: access the added object(self) and update its value
         # get this(self) object's key and update its value:
         this_obj = self.__class__.__name__ + '.' + self.id
         # print('this_object: ', this_obj)
