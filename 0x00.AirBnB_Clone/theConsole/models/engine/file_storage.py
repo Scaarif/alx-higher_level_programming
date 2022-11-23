@@ -45,3 +45,13 @@ class FileStorage:
                 FileStorage.__objects = json.load(f)
         except FileNotFoundError:
             pass
+
+    # personal addition
+    def update(self, obj_key, value):
+        """ updates the object with key == obj_key in __objects """
+        # assuming obj is an instance dictionary rep
+        # check that obj_key exits in __objects
+        for key in (FileStorage.__objects).keys():
+            if key == obj_key:
+                FileStorage.__objects[key] = value  # update key's value
+                # print('__objects updated!')
