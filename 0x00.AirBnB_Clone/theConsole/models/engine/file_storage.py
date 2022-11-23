@@ -18,7 +18,7 @@ class FileStorage:
         '''actual_objs = {}
         for key, val in (FileStorage.__objects).items():
             # val is a instance_dict representation
-            actual_objs[key] = BaseModel(**val)
+            actual_objs[key] = str(BaseModel(**val))
         return actual_objs'''
         return FileStorage.__objects
 

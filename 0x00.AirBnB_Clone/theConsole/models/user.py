@@ -11,7 +11,7 @@ class User(BaseModel):
     first_name = ''
     last_name = ''
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ Initialize user objects """
         # initialize super class
-        Base.__init__(self, *args, **args)
+        BaseModel.__init__(self, *args, **kwargs)
