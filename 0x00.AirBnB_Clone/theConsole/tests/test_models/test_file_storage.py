@@ -2,6 +2,7 @@
 """ Defines tests for the file_storage module, the FileStorage class """
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
 import unittest
 
 
@@ -43,8 +44,7 @@ class TestFileStorage(unittest.TestCase):
         obj_id """
         objects = self.store.all()
         for obj in objects.keys():
-            self.assertTrue('BaseModel' in obj)
-
+            self.assertTrue('BaseModel' in obj or 'User' in obj)
     # test all() - return an empty dict on class instantiation
     def test_method_all_return_at_instantiation(self):
         """ test that all() returns an empty dict on
