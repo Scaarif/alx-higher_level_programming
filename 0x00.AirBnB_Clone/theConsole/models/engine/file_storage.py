@@ -2,6 +2,8 @@
 """ Defines a class FileStorage that serializes instances to a JSON
 file and deserializes JSON file to instances """
 import json
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -25,16 +27,22 @@ class FileStorage:
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id """
         # assuming obj is an instance dictionary rep
-        # key = obj.__class__.__name__ + '.' + obj.id
-        key = obj['__class__'] + '.' + obj['id']
+        key = obj.__class__.__name__ + '.' + obj.id
+        # key = obj['__class__'] + '.' + obj['id']
         FileStorage.__objects[key] = obj  # append obj to __objects
 
     def save(self):
         """ serializes __objects to the JSON file(path: __file_path) """
         # dump __objects into file __file_path
         filename = FileStorage.__file_path
+        # ===========
+        objs_dict = {}
         with open(filename, mode='w', encoding='utf-8') as f:
-            json.dump(FileStorage.__objects, f)
+            for key, obj in (FileStorage.__objects).items():
+                objs_dict[key] = obj.to_dict()
+            json.dump(objs_dict, f)
+            # =================
+            # json.dump(FileStorage.__objects, f)
 
     def reload(self):
         """ deserializes the JSON file to __objects (only if
@@ -42,11 +50,19 @@ class FileStorage:
         # try to open and read from file
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
-                FileStorage.__objects = json.load(f)
+                # FileStorage.__objects = json.load(f)
+                objs_dict = json.load(f)
+                for key, obj in objs_dict.items():
+                    # recreate the __objects dictionary
+                    obj_cls = (key.split('.'))[0]
+                    if obj_cls == 'BaseModel':
+                        self.new(BaseModel(**obj))
+                    elif obj_cls == 'User':
+                        self.new(User(**obj))
         except FileNotFoundError:
             pass
 
-    # personal addition
+    # ===== personal addition (helpers) ==============
     def update(self, obj_key, value):
         """ updates the object with key == obj_key in __objects """
         # assuming obj is an instance dictionary rep

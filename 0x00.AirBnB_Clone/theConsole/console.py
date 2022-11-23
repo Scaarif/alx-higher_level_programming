@@ -109,14 +109,16 @@ class HBNBCommand(cmd.Cmd):
                     objects = storage.all()
                     # search for [this_id] object representation
                     this_key = f'{args[0]}.{args[1]}'
+                    # for obj, str_rep in objects.items():
                     for obj, str_rep in objects.items():
                         if obj == this_key:
                             # print this_obj (its str rep)
+                            print(str_rep) # the object
                             # ===========
-                            for key, val in (self.classes).items():
+                            '''for key, val in (self.classes).items():
                                 if key == args[0]:
                                     print(val(**str_rep))
-                                    break
+                                    break'''
                             # ===========
                             '''print(BaseModel(**str_rep))
                             break'''
@@ -186,7 +188,8 @@ class HBNBCommand(cmd.Cmd):
                         cls_name = (obj.split('.'))[0]
                         # if an object is of given class, print it
                         if cls_name == line:
-                            obj_list.append(str(method(**val)))
+                            # obj_list.append(str(method(**val)))
+                            obj_list.append(str(val))
                     print(obj_list)
                     break
             # =========================
@@ -197,9 +200,10 @@ class HBNBCommand(cmd.Cmd):
             # print all instances (no filter)
             for obj, val in objects.items():
                 # check class and call appropriate class_method
-                cls = (obj.split('.'))[0]
-                method = (self.classes)[cls]
-                obj_list.append(str(method(**val)))
+                # cls = (obj.split('.'))[0]
+                # method = (self.classes)[cls]
+                obj_list.append(str(val))
+                # obj_list.append(str(method(**val)))
             print(obj_list)
 
     def do_update(self, line):
@@ -218,25 +222,25 @@ class HBNBCommand(cmd.Cmd):
             else:
                 # class exists, check id is provided
                 if len(args) > 1:
-                    # check that an object with [id] exists
-                    # get the string objects (as reloaded)
                     objects = storage.all()
-                    # search for [this_id] object representation
-                    this_key = f'{args[0]}.{args[1]}'
+                    this_key = f'{args[0]}.{args[1]}' 
                     for obj, str_rep in objects.items():
                         if obj == this_key:
                             # object exists: update or add attribute
                             if len(args) > 2:
                                 # check if attribute already exists
-                                for k, val in str_rep.items():
+                                for k, val in (str_rep.to_dict()).items():
+                                # for k, val in str_rep.items():
                                     if k == args[2]:
                                         # attribute already exists
                                         # check if attr_value provided
                                         if len(args) > 3:
                                             # attr_value provided, cast+update
-                                            str_rep[k] = type(val)(args[3])
+                                            # str_rep[k] = type(val)(args[3])
+                                            setattr(str_rep, args[2], type(val)(args[3]))
                                             # reserialize objects into file
-                                            storage.save()
+                                            str_rep.save()
+                                            # storage.save()
                                         else:
                                             print("** value missing **")
                                         break  # from for loop
@@ -244,9 +248,11 @@ class HBNBCommand(cmd.Cmd):
                                     # attribute doesn't exist, add it
                                     if len(args) > 3:
                                         # extend object dict_rep
-                                        str_rep[args[2]] = args[3]
+                                        # str_rep[args[2]] = args[3]
+                                        setattr(str_rep, args[2], args[3])
                                         # reserialize __objects into file
-                                        storage.save()
+                                        # storage.save()
+                                        str_rep.save()
                                     else:
                                         print("** value missing **")
                             else:

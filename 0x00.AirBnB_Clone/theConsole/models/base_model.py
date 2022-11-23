@@ -5,7 +5,7 @@
 """
 import uuid
 from datetime import datetime
-from models import storage
+# from models import storage
 
 
 class BaseModel:
@@ -31,6 +31,7 @@ class BaseModel:
                     setattr(self, key, val)
         # else, kwargs undefined, initialize normally
         else:
+            from models import storage
             # generate a random id (using uuid4) for each instance created
             self.id = str(uuid.uuid4())  # cast the uuid into a string
             # assign current datetime when an object(instance) is created
@@ -38,8 +39,8 @@ class BaseModel:
             # track time of update (update it) to current time
             self.updated_at = datetime.now()
             # call storage's new() method - adds an obj to __objects
-            # storage.new(self)  # add this instance to __objects
-            storage.new(self.to_dict())  # add this instance to __objects
+            storage.new(self)  # add this instance to __objects
+            # storage.new(self.to_dict())  # add this instance to __objects
 
     def __str__(self):
         """ formats the object on print """
@@ -49,15 +50,16 @@ class BaseModel:
     def save(self):
         """ updates the public instance attribute updated_at to current
         datetime """
+        from models import storage
         self.updated_at = datetime.now()
         # this update isn't reflected in already added obj in __objects
         # let's change that: +include attr added to object after initialization
         # <needed>: access the added object(self) and update its value
         # get this(self) object's key and update its value:
-        this_obj = self.__class__.__name__ + '.' + self.id
+        # this_obj = self.__class__.__name__ + '.' + self.id
         # print('this_object: ', this_obj)
         # this updates both the updated_at attr and adds any new attributes
-        storage.update(this_obj, self.to_dict())
+        # storage.update(this_obj, self.to_dict())
         # call storage's save method: serialize __objects on update
         storage.save()
         # print('updated object: ', self.to_dict())

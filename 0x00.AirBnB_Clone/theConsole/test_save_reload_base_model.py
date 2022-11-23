@@ -5,9 +5,9 @@ all_objs = storage.all()
 print("-- Reloaded objects --")
 for obj_id in all_objs.keys():
  obj = all_objs[obj_id]
- inst = BaseModel(**obj)
- # print(obj)
- print(inst)
+ # inst = BaseModel(**obj)
+ print(obj)
+ # print(inst)
 print("-- Create a new object --")
 my_model = BaseModel()
 my_model.name = "My_First_Model"
