@@ -22,7 +22,7 @@ class BaseModel:
             for key, val in kwargs.items():
                 # check for time strs and convert to datetime
                 if key == 'created_at' or key == 'updated_at':
-                    self.key = val
+                    # self.key = val
                     setattr(self, key, datetime.fromisoformat(val))
                 # skip __class__ (not an attribute)
                 elif key == '__class__':

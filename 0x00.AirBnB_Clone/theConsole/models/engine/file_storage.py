@@ -53,5 +53,6 @@ class FileStorage:
         # check that obj_key exits in __objects
         for key in (FileStorage.__objects).keys():
             if key == obj_key:
-                FileStorage.__objects[key] = value  # update key's value
-                # print('__objects updated!')
+                # update obj"s dict_representation (to include all attributes)
+                FileStorage.__objects[key] = value  # update objects[key] value
+                # print('__objects updated_key: ', FileStorage.__objects[key])
