@@ -45,6 +45,7 @@ class TestFileStorage(unittest.TestCase):
         objects = self.store.all()
         for obj in objects.keys():
             self.assertTrue('BaseModel' in obj or 'User' in obj)
+
     # test all() - return an empty dict on class instantiation
     def test_method_all_return_at_instantiation(self):
         """ test that all() returns an empty dict on

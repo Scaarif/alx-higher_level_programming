@@ -18,7 +18,8 @@ class HBNBCommand(cmd.Cmd):
         """ Initializes class objects """
         # initialize super class (is this necessary)? No!
         cmd.Cmd.__init__(self)
-        self.classes = {'BaseModel': self.create_BaseModel, 'User': self.create_User}
+        self.classes = {'BaseModel': self.create_BaseModel,
+                        'User': self.create_User}
 
     def do_quit(self, line):
         """ exits the program: <quit> call method implementation
@@ -68,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
         it(to JSON file) & prints the id (instance's) """
         # check that class name is included in command
         if line:
-            # check if class is valid =================== 
+            # check if class is valid ===================
             for class_, method in (self.classes).items():
                 if class_ in line:
                     new = method()
@@ -99,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             args = line.split()
             # check that class exists
             if args[0] and args[0] not in (self.classes).keys():
-            # if args[0] and args[0] != 'BaseModel':
+                # if args[0] and args[0] != 'BaseModel':
                 print("** class doesn't exist **")
             else:
                 # class exists, check id is provided
@@ -113,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
                     for obj, str_rep in objects.items():
                         if obj == this_key:
                             # print this_obj (its str rep)
-                            print(str_rep) # the object
+                            print(str_rep)  # the object
                             # ===========
                             '''for key, val in (self.classes).items():
                                 if key == args[0]:
@@ -141,7 +142,7 @@ class HBNBCommand(cmd.Cmd):
             args = line.split()
             # check that class exists
             if args[0] and args[0] not in (self.classes).keys():
-            # if args[0] and args[0] != 'BaseModel':
+                # if args[0] and args[0] != 'BaseModel':
                 print("** class doesn't exist **")
             else:
                 # class exists, check id is provided
@@ -217,27 +218,28 @@ class HBNBCommand(cmd.Cmd):
             args = line.split()
             # check that class exists
             if args[0] and args[0] not in (self.classes).keys():
-            # if args[0] and args[0] != 'BaseModel':
+                # if args[0] and args[0] != 'BaseModel':
                 print("** class doesn't exist **")
             else:
                 # class exists, check id is provided
                 if len(args) > 1:
                     objects = storage.all()
-                    this_key = f'{args[0]}.{args[1]}' 
+                    this_key = f'{args[0]}.{args[1]}'
                     for obj, str_rep in objects.items():
                         if obj == this_key:
                             # object exists: update or add attribute
                             if len(args) > 2:
                                 # check if attribute already exists
                                 for k, val in (str_rep.to_dict()).items():
-                                # for k, val in str_rep.items():
+                                    # for k, val in str_rep.items():
                                     if k == args[2]:
                                         # attribute already exists
                                         # check if attr_value provided
                                         if len(args) > 3:
                                             # attr_value provided, cast+update
                                             # str_rep[k] = type(val)(args[3])
-                                            setattr(str_rep, args[2], type(val)(args[3]))
+                                            attr_val = type(val)(args[3])
+                                            setattr(str_rep, args[2], attr_val)
                                             # reserialize objects into file
                                             str_rep.save()
                                             # storage.save()
