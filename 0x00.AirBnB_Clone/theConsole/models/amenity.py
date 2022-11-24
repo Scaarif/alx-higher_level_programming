@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-""" Defines the class User, that inherits from class BaseModel """
+""" Defines the class Amenity, that inherits from class BaseModel """
 from models.base_model import BaseModel
 
 
-class User(BaseModel):
-    """ Defines the attributes/ methods of a User instance """
+class Amenity(BaseModel):
+    """ Defines the attributes/ methods of a Amenity instance """
     # define (public) class attributes
-    email = ''
-    password = ''
-    first_name = ''
-    last_name = ''
+    name = ''
 
     def __init__(self, *args, **kwargs):
         """ Initialize user objects """
