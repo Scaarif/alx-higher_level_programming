@@ -4,6 +4,11 @@ import cmd
 import sys
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 
 
@@ -19,7 +24,12 @@ class HBNBCommand(cmd.Cmd):
         # initialize super class (is this necessary)? No!
         cmd.Cmd.__init__(self)
         self.classes = {'BaseModel': self.create_BaseModel,
-                        'User': self.create_User}
+                        'User': self.create_User,
+                        'State': self.create_State,
+                        'City': self.create_City,
+                        'Place': self.create_Place,
+                        'Amenity': self.create_Amenity,
+                        'Review': self.create_Review}
 
     def do_quit(self, line):
         """ exits the program: <quit> call method implementation
@@ -48,19 +58,54 @@ class HBNBCommand(cmd.Cmd):
     # ++++ custom console commands ++++ #
     # ========= helper methods ===========
 
-    def create_BaseModel(self, *args, **kwargs):
+    def create_BaseModel(self, **kwargs):
         """ creates a new BaseModel instance """
         if kwargs:
             return BaseModel(**kwargs)
         else:
             return BaseModel()
 
-    def create_User(self, *args, **kwargs):
+    def create_User(self, **kwargs):
         """ creates a new User instance """
         if kwargs:
             return User(**kwargs)
         else:
             return User()
+
+    def create_State(self, **kwargs):
+        """ creates a new State instance """
+        if kwargs:
+            return State(**kwargs)
+        else:
+            return State()
+
+    def create_City(self, **kwargs):
+        """ creates a new City instance """
+        if kwargs:
+            return City(**kwargs)
+        else:
+            return City()
+
+    def create_Place(self, **kwargs):
+        """ creates a new Place instance """
+        if kwargs:
+            return Place(**kwargs)
+        else:
+            return Place()
+
+    def create_Amenity(self, **kwargs):
+        """ creates a new Amenity instance """
+        if kwargs:
+            return Amenity(**kwargs)
+        else:
+            return Amenity()
+
+    def create_Review(self, **kwargs):
+        """ creates a new Review instance """
+        if kwargs:
+            return Review(**kwargs)
+        else:
+            return Review()
 
     # ========== end of helper functions ==============
 
@@ -183,7 +228,8 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(str(BaseModel(**val)))
                 print(obj_list) '''
             # ======================
-            for cls, method in (self.classes).items():
+            # for cls, method in (self.classes).items():
+            for cls in (self.classes).keys():
                 if line == cls:
                     for obj, val in objects.items():
                         cls_name = (obj.split('.'))[0]
