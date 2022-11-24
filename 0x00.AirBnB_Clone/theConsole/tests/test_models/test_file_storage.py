@@ -12,6 +12,8 @@ class TestFileStorage(unittest.TestCase):
         """ set up instance objects to use for the tests """
         self.store = FileStorage()
         self.base_test = BaseModel()
+        self.classes = ['BaseModel', 'User', 'City', 'State', 'Place',
+                        'Amenity', 'Review']
 
     # test that class instantiates correctly
     def test_instantiation(self):
@@ -44,7 +46,8 @@ class TestFileStorage(unittest.TestCase):
         obj_id """
         objects = self.store.all()
         for obj in objects.keys():
-            self.assertTrue('BaseModel' in obj or 'User' in obj)
+            obj_cls = (obj.split('.'))[0]
+            self.assertTrue(obj_cls in self.classes)
 
     # test all() - return an empty dict on class instantiation
     def test_method_all_return_at_instantiation(self):
