@@ -35,14 +35,25 @@ class Illustrate(cmd.Cmd):
  
  def precmd(self, line):
     print(f'precmd({line})')
+    classes = ['User', 'State']
+    for obj in classes:
+        if line.startswith(obj):
+            commands = line.split('.')
+            print(commands)
+            commands[1] = commands[1].strip('()')
+            print(commands[1])
+            line = ' '.join(reversed(commands))
     return cmd.Cmd.precmd(self, line)
  
  def postcmd(self, stop, line):
     print(f'postcmd({stop}, {line})')
+    if '[' in line:
+        cmd.Cmd.onecmd(self, line)
     return cmd.Cmd.postcmd(self, stop, line)
  
  def do_greet(self, line):
     print('hello,', line)
+ 
  def do_EOF(self, line):
     "Exit"
     return True
