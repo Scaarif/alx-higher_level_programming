@@ -16,7 +16,6 @@ class City(Base):
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
 
-    def __init__(self, name, state_id):
+    def __init__(self, name):
         """ Initialize City instance/object """
         self.name = name
-        self.state_id = state_id

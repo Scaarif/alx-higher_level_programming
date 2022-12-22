@@ -19,9 +19,11 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     # create a session (to use), every interaction with the db requires one
     session = Session()
-    # create an object
+    # create a State (California) and a City (San Fransisco)
     new_state = State('California')
-    new_city = City('San Fransisco', 1)
+    new_city = City('San Fransisco')
+    # use the state relationship (backref'd) to update/assign state_id value
+    new_city.state = new_state
     # add the object to session
     session.add_all([new_state, new_city])
     # commit the session
