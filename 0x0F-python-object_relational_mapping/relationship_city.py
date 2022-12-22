@@ -4,11 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import MetaData, Column, String, Integer, ForeignKey
 # from sqlalchemy.orm import relationship
 
-from model_state import Base, State
-
-# Base = declarative_base()
-
-#  define the class State
+from relationship_state import Base, State
 
 
 class City(Base):
@@ -19,4 +15,8 @@ class City(Base):
                 nullable=False, unique=True, autoincrement=True)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
-    # state = relationship("State")
+
+    def __init__(self, name, state_id):
+        """ Initialize City instance/object """
+        self.name = name
+        self.state_id = state_id

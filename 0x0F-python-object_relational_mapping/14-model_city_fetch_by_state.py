@@ -2,6 +2,7 @@
 """ Start link class to table in database & lists all cities by state """
 import sys
 from model_state import Base, State
+# from model_state_and_city import Base, State, City
 from model_city import City
 
 from sqlalchemy import (create_engine)
@@ -16,8 +17,9 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     # create a session (to use), every interaction with the db requires one
     session = Session()
-    # query the State
-    state_cities = session.query(City).join(State).order_by(City.id)
-    # see what the results are:
+    # query for City name & id + State name (state_cities: list of tuples)
+    state_cities = session.query(
+        City.id, City.name, State.name).join(State).order_by(City.id)
+    # print (each result is a tuple of city.id, city.name & state.name)
     for state_city in state_cities:
-        print(f'{state_city.id}:', state_city.name)
+        print(f'{state_city[2]}: ({state_city[0]})', state_city[1])
