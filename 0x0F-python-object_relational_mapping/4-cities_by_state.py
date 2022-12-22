@@ -18,9 +18,9 @@ if __name__ == '__main__':
     # get cursor (for multiple working envs using the same connection)
     cur = conn.cursor()
     # query the database (using actual SQL queries) for all states
-    cur.execute("SELECT cities.id, cities.name, states.name
-                FROM cities
-                JOIN states ON state_id=states.id
+    cur.execute(
+        "SELECT cities.id, cities.name, states.name \
+                FROM cities JOIN states ON state_id=states.id \
                 ORDER BY cities.id ASC")
     # get query results
     states = cur.fetchall()

@@ -19,10 +19,8 @@ if __name__ == '__main__':
     # get cursor (for multiple working envs using the same connection)
     cur = conn.cursor()
     # query the database (using actual SQL queries) for the states
-    cur.execute("SELECT id, name
-                FROM states
-                WHERE name LIKE 'N%'
-                ORDER BY id ASC")
+    cur.execute(
+        "SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
     # get query results
     states = cur.fetchall()
     # do something with the results (print them out)
