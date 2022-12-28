@@ -4,7 +4,9 @@
     The scripts takes 4 arguments:
         the username, password, database name & the name of
         state to be searched for.
-    Also, its safe from SQL Injections...
+    Also, its safe from SQL Injections... achieved by using query
+    parameters (& passing the value as the 2nd parameter to execute:
+    this way, MySQLdb escapes any chars that might be dangerous)
 """
 import sys
 import MySQLdb

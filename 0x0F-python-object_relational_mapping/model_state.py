@@ -13,6 +13,7 @@ class State(Base):
     """ Defines the State class (with sqlalchemy datatypes )
     which defines the State table (to be created) """
     __tablename__ = 'states'  # the name of the table to be created
+    # define the fields/cols in the schema/table
     id = Column(Integer, primary_key=True,
                 nullable=False, unique=True, autoincrement=True)
     name = Column(String(128), nullable=False)
