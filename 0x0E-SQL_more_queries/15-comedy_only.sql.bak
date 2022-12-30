@@ -6,9 +6,10 @@
 SELECT title
 FROM tv_shows
 JOIN tv_show_genres
-ON  tv_shows.id = show_id
-JOIN tv_genres
-ON genre_id = tv_genres.id
-WHERE name = 'Comedy'
+ON  id = show_id
+WHERE genre_id = (
+	SELECT id
+	FROM tv_genres
+	WHERE name = 'Comedy'
+)
 ORDER BY title ASC;
--- this uses MULTIPLE JOINS joining the first appearing table with the second and the second with the third...

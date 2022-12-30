@@ -8,3 +8,6 @@ FROM tv_show_genres
 RIGHT JOIN tv_shows
 ON  id = show_id
 ORDER BY title, genre_id;
+-- This query is the same as a LEFT JOIN of the two tables (with the first table being tv_shows)
+-- In both cases all the values (records) in tv_shows are returned and if there are no matching values
+-- in the other table (tv_show_genres), NULL values are appended in their place
