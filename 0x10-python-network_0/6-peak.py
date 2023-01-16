@@ -28,14 +28,14 @@ def find_peak(list_of_integers):
                 return ls[mid]
             else:
                 if ls[mid - 1] > ls[mid + 1]:
-                    find_peak(ls[:mid])
+                    return find_peak(ls[:mid])
                 else:
-                    find_peak(ls[mid + 1:])
+                    return find_peak(ls[mid + 1:])
         else:  # mid is part of first sub list
             if (ls[mid] > ls[mid + 1]):
-                find_peak(ls[:mid + 1])
+                return find_peak(ls[:mid + 1])
             else:
-                find_peak(ls[mid + 1:])
+                return find_peak(ls[mid + 1:])
 
 
 if __name__ == "__main__":
