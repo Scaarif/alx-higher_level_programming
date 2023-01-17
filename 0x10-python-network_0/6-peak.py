@@ -24,7 +24,7 @@ def find_peak(list_of_integers):
             mid = (len(ls) // 2) - 1
         if len(ls) % 2:  # even (sublists equal)
             # check if the mid value is greater than its neihbours
-            if ls[mid] < ls[mid] > ls[mid - 1]:
+            if ls[mid - 1] < ls[mid] > ls[mid - 1]:
                 return ls[mid]
             else:
                 if ls[mid - 1] > ls[mid + 1]:
