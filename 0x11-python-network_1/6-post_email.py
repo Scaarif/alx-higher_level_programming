@@ -3,7 +3,7 @@
     the email as a parameter and displays the body of the response
     (decoded in utf-8)
 """
-import urllib.request
+import requests
 import sys
 
 
@@ -11,7 +11,5 @@ if __name__ == "__main__":
     url = f'{sys.argv[1]}'
     data = {}
     data['email'] = sys.argv[2]
-    req = urllib.request.Request(url, data)
-    with urllib.request.urlopen(req) as response:
-        res = response.decode('utf-8')
-        print(res)
+    res = requests.post(url, data=data)
+    print(res.text)
