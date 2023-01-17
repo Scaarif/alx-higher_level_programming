@@ -11,5 +11,6 @@ if __name__ == "__main__":
         res = response.read()
         # print the res, formatted (assuming its a dict)
         print('Body responses:')
-        for (key, value) in res.items():
-            print(f'\t- {key}: {value}')
+        print(f'\t- type: {type(res)}')
+        print(f'\t- content: {res}')
+        print(f'\t- utf-8 content: {res.decode("utf-8")}')
