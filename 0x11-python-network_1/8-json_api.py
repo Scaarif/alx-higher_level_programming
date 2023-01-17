@@ -22,7 +22,7 @@ if __name__ == "__main__":
         q = ""
     payload = {'q': q}
     res = requests.post('http://0.0.0.0:5000/search_user', data=payload)
-    if res.status_code == 204 or res == {}:  # no content (empty)
+    if res == {}:  # no content (empty)
         print('No result')
     else:
         try:
