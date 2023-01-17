@@ -10,7 +10,7 @@ if __name__ == "__main__":
     with urllib.request.urlopen(req) as response:
         res = response.read()
         # print the res, formatted (assuming its a dict)
-        print('Body responses:')
+        print('Body response:')
         print(f'\t- type: {type(res)}')
         print(f'\t- content: {res}')
         print(f'\t- utf-8 content: {res.decode("utf-8")}')
