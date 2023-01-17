@@ -9,7 +9,7 @@ import sys
 
 
 if __name__ == "__main__":
-    url = f'{sys.argv[1]}'
+    url = sys.argv[1]
     req = urllib.request.Request(url)
     try:
         with urllib.request.urlopen(req) as response:

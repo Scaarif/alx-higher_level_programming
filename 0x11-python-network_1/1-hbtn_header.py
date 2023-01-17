@@ -7,7 +7,7 @@ import sys
 
 
 if __name__ == "__main__":
-    req = urllib.request.Request(f'{sys.argv[1]}')
+    req = urllib.request.Request(sys.argv[1])
     with urllib.request.urlopen(req) as response:
-        res = response.info()  # get the headers from the response
-        print(res['X-Request-Id'])  # info() returns a dict
+        res = response.info()
+        print(res['X-Request-Id'])
