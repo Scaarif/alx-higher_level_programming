@@ -22,13 +22,10 @@ if __name__ == "__main__":
         q = ""
     payload = {'q': q}
     res = requests.post('http://0.0.0.0:5000/search_user', data=payload)
-    if res == {}:  # no content (empty)
-        print('No result')
-    else:
-        try:
-            val = res.json()
-            if val == {}:  # no content (empty)
-                print('No result')
-            print('[{}] {}'.format(val.get('id'), val.get('name')))
-        except Exception:
-            print('Not a valid JSON')
+    try:
+        val = res.json()
+        if val == {}:  # no content (empty)
+            print('No result')
+        print('[{}] {}'.format(val.get('id'), val.get('name')))
+    except Exception:
+        print('Not a valid JSON')
