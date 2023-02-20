@@ -1,12 +1,12 @@
 #!/usr/bin/node
 /* Toggle between 'green' & 'red' class for <header> element when div (id = red_header) is clicked */
-$('#toggle_header div').on('click', toggleClass($('header')));
-function toggleClass (sender) {
-  if ($(sender).hasClass('red')) {
-    $(sender).removeClass('red');
-    $(sender).addClass('green');
+const $ = window.$;
+$('DIV#toggle_header').on('click', function () {
+  if ($('header').hasClass('red')) {
+    $('header').removeClass('red');
+    $('header').addClass('green');
   } else {
-    $(sender).removeClass('green');
-    $(sender).addClass('red');
+    $('header').removeClass('green');
+    $('header').addClass('red');
   }
-}
+});
